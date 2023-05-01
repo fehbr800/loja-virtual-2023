@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dev.backend.entity.Marca;
 import com.dev.backend.service.MarcaService;
 
-import jakarta.websocket.server.PathParam;
+
 
 @RestController
 @RequestMapping("/api/marca")
