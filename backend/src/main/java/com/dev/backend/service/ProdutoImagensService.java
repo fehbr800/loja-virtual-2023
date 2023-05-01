@@ -29,6 +29,8 @@ public class ProdutoImagensService {
         return produtoImagensRepository.findAll();
     }
 
+    
+
     public ProdutoImagens inserir(Long idProduto, MultipartFile file) {
         Produto produto = produtoRepository.findById(idProduto).get();
         ProdutoImagens produtoImagens = new ProdutoImagens();
