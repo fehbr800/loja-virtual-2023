@@ -54,4 +54,11 @@ public class Pessoa {
         this.permissaoPessoa = pp;
     }
 
+    public void setDataCriacao(Date date) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    
+
+   
 }
