@@ -4,11 +4,13 @@ import org.springframework.stereotype.Service;
 
 import com.dev.backend.dto.PessoaClienteRequestDTO;
 import com.dev.backend.entity.Pessoa;
-import com.dev.backend.repository.PermissaoRepository;
+
 import com.dev.backend.repository.PessoaClienteRepository;
-import com.dev.backend.repository.PessoaRepository;
+
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,7 +31,11 @@ public class PessoaClienteService {
         pessoa.setDataCriacao(new Date());
         Pessoa pessoaNova = pessoaRepository.saveAndFlush(pessoa);
         permissaoPessoaService.vincularPessoaPermissaoCliente(pessoaNova);
-        emailService.enviarEmailTexto(pessoaNova.getEmail(), "Cadastro na Loja: Atletismo Shoes  ", "Cadastro realizado com Sucesso. Em breve você receberá a senha de acesso por e-mail!!");
+        // emailService.enviarEmailTexto(pessoaNova.getEmail(), "Cadastro na Loja: Atletismo Shoes  ", "Cadastro realizado com Sucesso. Em breve você receberá a senha de acesso por e-mail!!");
+        Map<String, Object> propMap = new HashMap<>();
+        propMap.put("nome", pessoaNova.getNome());
+        propMap.put("mensagem", "Cadastro realizado com Sucesso. Em breve você receberá a senha de acesso por e-mail!!");
+        emailService.enviarEmailTemplate(pessoaNova.getEmail(), "Cadastro na Loja: Atletismo Shoes", propMap);
         return pessoaNova;
     }
 
