@@ -2,8 +2,10 @@ package com.dev.backend.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,37 +15,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dev.backend.entity.Estado;
-import com.dev.backend.service.EstadoService;
-
-
-
+import com.dev.backend.entity.Permissao;
+import com.dev.backend.service.PermissaoService;
 
 @RestController
-@RequestMapping("/api/estado")
-public class EstadoController {
-
+@RequestMapping("/api/permissao")
+@CrossOrigin
+public class PermissaoController {
+    
     @Autowired
-    private EstadoService estadoService;
+    private PermissaoService permissaoService;
 
     @GetMapping("/")
-    public List<Estado> buscarTodos() {
-        return estadoService.buscarTodos();
+    public List<Permissao> buscarTodos(){
+       return permissaoService.buscarTodos();
     }
 
     @PostMapping("/")
-    public Estado inserir(@RequestBody Estado estado) {
-        return estadoService.inserir(estado);
+    public Permissao inserir(@RequestBody Permissao permissao){
+        return permissaoService.inserir(permissao);
     }
 
     @PutMapping("/")
-    public Estado alterar(@RequestBody Estado estado) {
-        return estadoService.alterar(estado);
+    public Permissao alterar(@RequestBody Permissao permissao){
+        return permissaoService.alterar(permissao);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable("id") Long id) {
-        estadoService.excluir(id);
+    public ResponseEntity<Void> excluir(@PathVariable("id") Long id){
+        permissaoService.excluir(id);
         return ResponseEntity.ok().build();
     }
+
 }

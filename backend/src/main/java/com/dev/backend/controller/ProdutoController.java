@@ -2,8 +2,10 @@ package com.dev.backend.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,37 +15,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dev.backend.entity.Estado;
-import com.dev.backend.service.EstadoService;
-
-
-
+import com.dev.backend.entity.Produto;
+import com.dev.backend.service.ProdutoService;
 
 @RestController
-@RequestMapping("/api/estado")
-public class EstadoController {
-
+@RequestMapping("/api/produto")
+@CrossOrigin
+public class ProdutoController {
+    
     @Autowired
-    private EstadoService estadoService;
+    private ProdutoService produtoService;
 
     @GetMapping("/")
-    public List<Estado> buscarTodos() {
-        return estadoService.buscarTodos();
+    public List<Produto> buscarTodos(){
+       return produtoService.buscarTodos();
+    }
+
+    @GetMapping("/{id}")
+    public Produto buscarPorId(@PathVariable("id") Long id){
+       return produtoService.buscarPorId(id);
     }
 
     @PostMapping("/")
-    public Estado inserir(@RequestBody Estado estado) {
-        return estadoService.inserir(estado);
+    public Produto inserir(@RequestBody Produto produto){
+        return produtoService.inserir(produto);
     }
 
     @PutMapping("/")
-    public Estado alterar(@RequestBody Estado estado) {
-        return estadoService.alterar(estado);
+    public Produto alterar(@RequestBody Produto produto){
+        return produtoService.alterar(produto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable("id") Long id) {
-        estadoService.excluir(id);
+    public ResponseEntity<Void> excluir(@PathVariable("id") Long id){
+        produtoService.excluir(id);
         return ResponseEntity.ok().build();
     }
+
 }
